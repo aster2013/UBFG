@@ -75,6 +75,7 @@ private:
     bool outputFNT(const QList<FontRec>& fontLst, const QImage& texture);
     bool outputXML(const QList<FontRec>& fontLst, const QImage& texture);
     bool outputBMFont(const QList<FontRec>& fontLst, const QImage& texture);
+    bool outputBMFontXML(const QList<FontRec>& fontLst, const QImage& texture);
     unsigned int qchar2ui(QChar ch);
     QImage texture;
     QList<QImage> glyphs;
