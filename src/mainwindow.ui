@@ -1070,6 +1070,11 @@
               <string>BMFont</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>BMFont XML</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
