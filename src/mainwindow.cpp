@@ -43,7 +43,11 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         ui->encoding->addItem(avaiableCodecs.at(i));
     }
-    ui->outDir->setText(QDir::homePath());
+
+    // Use current directory.
+    // ui->outDir->setText(QDir::homePath());
+    ui->outDir->setText(QDir::currentPath());
+
     readSettings();
     thread->run();
 }
