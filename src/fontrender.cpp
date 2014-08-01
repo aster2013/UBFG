@@ -326,10 +326,10 @@ void FontRender::run()
                     p.drawImage(QPoint(glyphLst.at(i).rc.x(), glyphLst.at(i).rc.y()), glyphLst.at(i).img);
 
         QImage scaled = texture.scaled(texture.size() * 8, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-        dfcalculate(&scaled, 8, exporting && ui->transparent->isEnabled() && ui->transparent->isChecked());
+        // dfcalculate(&scaled, 8, exporting && ui->transparent->isEnabled() && ui->transparent->isChecked());
         QImage texture1 = (scaled.scaled(texture.size()));
         texture = texture1;
-        
+
         if (ui->transparent->isEnabled() && ui->transparent->isChecked())
         {
             if (0 == ui->bitDepth->currentIndex()) // 8 bit alpha image
@@ -374,7 +374,7 @@ void FontRender::run()
                              QString::number(percent2) + QString("%."));
         if(packer.missingChars == 0) done = true;
         QImage scaled = texture.scaled(texture.size()*8, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-        dfcalculate(&scaled, 8, exporting && ui->transparent->isEnabled() && ui->transparent->isChecked());
+        // dfcalculate(&scaled, 8, exporting && ui->transparent->isEnabled() && ui->transparent->isChecked());
         emit renderedImage(scaled.scaled(texture.size()));
     }
     int nMilliseconds = myTimer.elapsed();
@@ -682,7 +682,7 @@ bool FontRender::outputBMFontXML(const QList<FontRec>& fontLst, const QImage& te
         fontStream << "</pages>" << endl;
 
         // output "chars" tag
-        fontStream << "<chars " << 
+        fontStream << "<chars " <<
             "count=\"" << fontRecIt->m_glyphLst.size() << "\">" << endl;
 
         // output each glyph record
