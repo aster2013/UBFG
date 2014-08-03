@@ -565,9 +565,20 @@ bool FontRender::outputBMFont(const QList<FontRec>& fontLst, const QImage& textu
         // output "common" tag
         QFontMetrics fontMetrics(fontRecIt->m_qfont);
         bool transparent = ui->transparent->isEnabled() && ui->transparent->isChecked();
+
+        // Fix line height and base bug
+        int lineHeight = fontMetrics.height();
+        int base = fontMetrics.ascent();
+        if (lineHeight != fontRecIt->m_size)
+        {
+            float scale = (float)lineHeight / (float)fontRecIt->m_size;
+            lineHeight = fontRecIt->m_size;
+            base = (int)(base / scale);
+        }
+
         fontStream << "common " <<
-                      "lineHeight=" << fontMetrics.height() << " " <<
-                      "base=" << fontMetrics.ascent() << " " <<
+                      "lineHeight=" << lineHeight << " " <<
+                      "base=" << base << " " <<
                       "scaleW=" << texture.width() << " " <<
                       "scaleH=" << texture.height() << " " <<
                       "pages=1 " <<
@@ -661,10 +672,21 @@ bool FontRender::outputBMFontXML(const QList<FontRec>& fontLst, const QImage& te
 
         // output "common" tag
         QFontMetrics fontMetrics(fontRecIt->m_qfont);
+
+        // Fix line height and base bug
+        int lineHeight = fontMetrics.height();
+        int base = fontMetrics.ascent();
+        if (lineHeight != fontRecIt->m_size)
+        {
+            float scale = (float)lineHeight / (float)fontRecIt->m_size;
+            lineHeight = fontRecIt->m_size;
+            base = (int)(base / scale);
+        }
+
         bool transparent = ui->transparent->isEnabled() && ui->transparent->isChecked();
         fontStream << "<common " <<
-            "lineHeight=\"" << fontMetrics.height() << "\" " <<
-            "base=\"" << fontMetrics.ascent() << "\" " <<
+            "lineHeight=\"" << lineHeight << "\" " <<
+            "base=\"" << base << "\" " <<
             "scaleW=\"" << texture.width() << "\" " <<
             "scaleH=\"" << texture.height() << "\" " <<
             "pages=\"1\" " <<
